@@ -6,7 +6,7 @@ A collection of practical examples and demonstrations for building AI agents and
 
 ### [Claude Agent SDK with Databricks](./databricks_claude_agent_sdk_example)
 
-Build autonomous AI agents using the Claude Agent SDK integrated with Databricks. This comprehensive example demonstrates:
+**Access Claude AI models through Databricks** and build autonomous AI agents using the Claude Agent SDK. This comprehensive example demonstrates how to leverage Claude models (Haiku, Sonnet, Opus) served via Databricks Model Serving endpoints:
 
 - **Basic Agent Usage** - File analysis, code generation, autonomous task execution
 - **MLflow Integration** - Manual logging, autologging, and GenAI evaluation
@@ -14,13 +14,16 @@ Build autonomous AI agents using the Claude Agent SDK integrated with Databricks
 - **Enterprise Observability** - Complete tracking and monitoring of agent interactions
 
 **Key Features:**
-- ✅ Runs locally and on Databricks
-- 📊 6 progressive examples from basic to enterprise
-- 🔧 Unity Catalog and DBSQL MCP server integration
-- 🚀 MLflow autologging and evaluation framework
-- 📈 Production-ready patterns and best practices
+- 🤖 **Claude via Databricks** - Access Claude models (Haiku, Sonnet, Opus) through Databricks Model Serving
+- ✅ **Runs locally and on Databricks** - Develop locally, deploy on Databricks infrastructure
+- 📊 **6 progressive examples** - From basic to enterprise with MLflow and MCP integration
+- 🔧 **Enterprise data access** - Unity Catalog Functions, DBSQL, and Genie MCP servers
+- 🚀 **Complete observability** - MLflow autologging and GenAI evaluation framework
+- 📈 **Production-ready** - Databricks authentication, security, and governance
 
-**Tech Stack:** Claude Agent SDK, Databricks, MLflow, Model Context Protocol (MCP)
+**Tech Stack:** Claude Agent SDK, Databricks Model Serving, MLflow, Model Context Protocol (MCP)
+
+**Why This Matters:** All Claude interactions route through your Databricks workspace, enabling enterprise security controls, data governance, cost tracking, and seamless integration with your lakehouse data.
 
 👉 [View detailed documentation](./databricks_claude_agent_sdk_example/README.md)
 

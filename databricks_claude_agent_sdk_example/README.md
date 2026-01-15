@@ -1,6 +1,18 @@
 # Claude Agent SDK with Databricks
 
-Build autonomous AI agents using the Claude Agent SDK integrated with Databricks.
+Build autonomous AI agents using **Claude models served by Databricks** through the Claude Agent SDK.
+
+## Overview
+
+This example demonstrates how to access and use **Claude AI models (Haiku, Sonnet, Opus) via Databricks Model Serving**. Instead of calling Anthropic's API directly, these notebooks show you how to:
+
+- ✅ **Connect to Claude models through Databricks** using `/serving-endpoints/anthropic`
+- 🔐 **Authenticate with Databricks PAT tokens** instead of Anthropic API keys
+- 📊 **Integrate with Databricks MLflow** for experiment tracking and evaluation
+- 🔧 **Access enterprise data** via Databricks MCP (Unity Catalog, DBSQL, Genie)
+- 🚀 **Deploy production agents** with Databricks infrastructure
+
+**Key Advantage**: All Claude interactions go through your Databricks workspace, enabling enterprise security, governance, and integration with your data lakehouse.
 
 ## Quick Start
 
@@ -326,6 +338,24 @@ The Claude Agent SDK includes:
 - **WebSearch** - Search web
 - **WebFetch** - Fetch pages
 
+## How It Works: Claude via Databricks
+
+The key to using Claude through Databricks is configuring the Claude Agent SDK to point to your Databricks workspace:
+
+```bash
+# Point Claude Agent SDK to Databricks instead of Anthropic
+ANTHROPIC_AUTH_TOKEN=your-databricks-pat-token              # Use Databricks PAT
+ANTHROPIC_BASE_URL=https://your-workspace.cloud.databricks.com/serving-endpoints/anthropic
+ANTHROPIC_CUSTOM_HEADERS=x-databricks-disable-beta-headers: true
+ANTHROPIC_MODEL=databricks-claude-haiku-4-5                 # Specify model variant
+```
+
+This configuration:
+1. **Routes all Claude API calls through Databricks** Model Serving endpoints
+2. **Uses your Databricks PAT** for authentication (not Anthropic API keys)
+3. **Enables access to Claude models** (Haiku 4.5, Sonnet 4.5, Opus) via Databricks
+4. **Integrates with Databricks services** (MLflow, Unity Catalog, MCP servers)
+
 ## Configuration
 
 Create a `.env` file with the following required variables:
@@ -335,7 +365,7 @@ Create a `.env` file with the following required variables:
 DATABRICKS_HOST=https://your-workspace.cloud.databricks.com
 DATABRICKS_TOKEN=your-databricks-pat-token
 
-# Claude Agent SDK Configuration (Required)
+# Claude Agent SDK Configuration (Routes to Databricks)
 ANTHROPIC_AUTH_TOKEN=your-databricks-pat-token
 ANTHROPIC_BASE_URL=https://your-workspace.cloud.databricks.com/serving-endpoints/anthropic
 ANTHROPIC_CUSTOM_HEADERS=x-databricks-disable-beta-headers: true
