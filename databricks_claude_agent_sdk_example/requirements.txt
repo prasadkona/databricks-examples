@@ -1,0 +1,7 @@
+# Core Dependencies
+claude-agent-sdk>=0.1.19
+python-dotenv>=1.0.0
+
+# Databricks Integration
+databricks-sdk>=0.30.0
+mlflow>=2.16.0
