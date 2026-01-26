@@ -413,7 +413,15 @@ spark.table("predictions_cache")
 
 ## License
 
-This example is provided as-is for demonstration purposes.
+This project is licensed under the **Apache License 2.0** - see the [LICENSE](../LICENSE) file for details.
+
+**You are free to:**
+- ✅ Use this code commercially
+- ✅ Modify and distribute
+- ✅ Use in private projects
+- ✅ Use for any purpose
+
+This is open-source software - feel free to reuse, adapt, and build upon this example!
 
 ---
 
