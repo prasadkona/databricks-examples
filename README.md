@@ -1,7 +1,7 @@
 # Databricks Examples
 
 **Author**: Prasad Kona  
-**Last Updated**: January 26, 2026
+**Last Updated**: March 3, 2026
 
 A collection of practical, production-ready examples demonstrating how to build AI agents, deploy ML models, and create intelligent applications on the Databricks platform. Each project includes complete code, detailed documentation, and best practices for enterprise deployment.
 
@@ -41,6 +41,23 @@ Build autonomous AI agents using Claude models served by Databricks through the 
 
 ---
 
+### 3. [Agent Bricks: Knowledge Assistant](./agent_bricks_ka_example)
+
+Create and manage Databricks Agent Bricks Knowledge Assistants programmatically. Knowledge Assistants enable document-based Q&A using RAG (Retrieval-Augmented Generation) over Unity Catalog Volumes with automatic indexing and citation-backed responses.
+
+**Highlights:**
+- Create Knowledge Assistants via REST API and Python SDK
+- Index documents from Unity Catalog Volumes (PDF, TXT, MD, DOCX, PPTX)
+- Multi-turn conversations with context retention
+- Add example questions with guidelines to improve response quality
+- Sync and re-index knowledge sources programmatically
+
+**Tech Stack:** Databricks Agent Bricks, REST API, Databricks SDK, Unity Catalog Volumes, Model Serving
+
+👉 [View detailed documentation](./agent_bricks_ka_example/README.md)
+
+---
+
 ## 🚀 Getting Started
 
 Each project is self-contained with its own documentation and dependencies:
@@ -64,17 +81,24 @@ Additional requirements vary by project - see individual project READMEs for det
 ```
 databricks-examples/
 ├── README.md                                  # This file
+├── _local/                                    # Gitignored credentials & local data
 │
 ├── python_udfs_custom_dependencies/           # Python UDFs with custom dependencies
 │   ├── README.md                              # Full project documentation
 │   ├── requirements.txt                       # Python dependencies
 │   └── notebooks/                             # 4 notebooks (training, UDFs, SQL examples)
 │
-└── databricks_claude_agent_sdk_example/       # Claude Agent SDK demos
+├── databricks_claude_agent_sdk_example/       # Claude Agent SDK demos
+│   ├── README.md                              # Full project documentation
+│   ├── SETUP.md                               # Setup instructions
+│   ├── requirements.txt                       # Python dependencies
+│   └── notebooks/                             # 6 progressive examples
+│
+└── agent_bricks_ka_example/                   # Agent Bricks Knowledge Assistant
     ├── README.md                              # Full project documentation
-    ├── SETUP.md                               # Setup instructions
+    ├── .env.template                          # Environment configuration template
     ├── requirements.txt                       # Python dependencies
-    └── notebooks/                             # 6 progressive examples
+    └── src/                                   # 6 scripts (setup, create, test, sync)
 ```
 
 ## 🎯 Use Cases
@@ -86,6 +110,10 @@ databricks-examples/
 ### AI Agents & GenAI
 - Build autonomous agents with Claude models and enterprise data access
 - Integrate AI agents with Unity Catalog, DBSQL, and Genie for data-driven applications
+
+### Agent Bricks & RAG
+- Create Knowledge Assistants for document Q&A with automatic RAG indexing
+- Build production-ready document assistants with citation-backed responses
 
 ## 🔐 Security
 
@@ -115,4 +143,4 @@ This is open-source software - feel free to reuse, adapt, and build upon these e
 **Repository**: https://github.com/prasadkona/databricks-examples  
 **Author**: Prasad Kona  
 **Contact**: prasad.kona@gmail.com  
-**Last Updated**: January 26, 2026
+**Last Updated**: March 3, 2026

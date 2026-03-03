@@ -1,0 +1,5 @@
+# Agent Bricks Knowledge Assistant Examples
+# Requirements for running notebooks locally or in Databricks
+
+databricks-sdk>=0.28.0
+requests>=2.28.0

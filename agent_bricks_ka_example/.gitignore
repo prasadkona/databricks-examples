@@ -1,0 +1,22 @@
+# Environment files with credentials
+.env
+*-workspace.env
+*-demo*.env
+
+# Keep the template (it has no secrets)
+# .env.template is NOT ignored
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+
+# OS
+.DS_Store
