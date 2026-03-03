@@ -6,6 +6,10 @@
 *.env
 .env.*
 
+# BUT keep templates (no secrets)
+!.env.template
+!**/.env.template
+
 # Databricks credentials
 .databricks/
 *.databrickscfg
