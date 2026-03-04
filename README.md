@@ -58,6 +58,22 @@ Create and manage Databricks Agent Bricks Knowledge Assistants programmatically.
 
 ---
 
+### 4. [AI Agent Metadata Extractor](./ai_agent_metadata_extract)
+
+Extract and classify metadata about all deployed AI agents and serving endpoints in your Databricks workspace. Provides comprehensive visibility into Foundation Models, Agent Bricks, AI Gateway endpoints, and UC-registered models.
+
+**Highlights:**
+- Single API call extraction for fast metadata retrieval
+- Classify endpoints by type: FM (PPT/PT), Agent Bricks (KA/MAS/KIE/MS), AI Gateway, Classic ML
+- Enrich Agent Bricks with Tiles API metadata (name, description, instructions)
+- Export to JSON and Markdown reports
+
+**Tech Stack:** Databricks SDK, REST API, Python
+
+👉 [View detailed documentation](./ai_agent_metadata_extract/README.md)
+
+---
+
 ## 🚀 Getting Started
 
 Each project is self-contained with its own documentation and dependencies:
@@ -94,11 +110,18 @@ databricks-examples/
 │   ├── requirements.txt                       # Python dependencies
 │   └── notebooks/                             # 6 progressive examples
 │
-└── agent_bricks_ka_example/                   # Agent Bricks Knowledge Assistant
+├── agent_bricks_ka_example/                   # Agent Bricks Knowledge Assistant
+│   ├── README.md                              # Full project documentation
+│   ├── .env.template                          # Environment configuration template
+│   ├── requirements.txt                       # Python dependencies
+│   └── src/                                   # 6 scripts (setup, create, test, sync)
+│
+└── ai_agent_metadata_extract/                 # AI endpoint metadata extraction
     ├── README.md                              # Full project documentation
     ├── .env.template                          # Environment configuration template
-    ├── requirements.txt                       # Python dependencies
-    └── src/                                   # 6 scripts (setup, create, test, sync)
+    ├── 01_extract_ai_endpoints_detailed.py    # Detailed extraction with Tiles API
+    ├── 02_generate_endpoint_analysis_report.py # Markdown reports by model_type
+    └── 03_extract_ai_endpoints_fast.py        # Fast single API call extraction
 ```
 
 ## 🎯 Use Cases
@@ -114,6 +137,10 @@ databricks-examples/
 ### Agent Bricks & RAG
 - Create Knowledge Assistants for document Q&A with automatic RAG indexing
 - Build production-ready document assistants with citation-backed responses
+
+### Governance & Observability
+- Extract and classify all AI endpoints across your workspace
+- Generate reports on Foundation Models, Agent Bricks, and AI Gateway usage
 
 ## 🔐 Security
 
