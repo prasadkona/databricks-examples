@@ -60,11 +60,12 @@ Create and manage Databricks Agent Bricks Knowledge Assistants programmatically.
 
 ### 4. [AI Agent Metadata Extractor](./ai_agent_metadata_extract)
 
-Extract and classify metadata about all deployed AI agents and serving endpoints in your Databricks workspace. Provides comprehensive visibility into Foundation Models, Agent Bricks, AI Gateway endpoints, and UC-registered models.
+Extract and classify metadata about all deployed AI agents, serving endpoints, and Knowledge Assistants in your Databricks workspace. Provides comprehensive visibility into Foundation Models, Agent Bricks, AI Gateway endpoints, UC-registered models, and Knowledge Assistants.
 
 **Highlights:**
-- Single API call extraction for fast metadata retrieval
+- Extract serving endpoints with single API call (fast) or detailed per-endpoint calls
 - Classify endpoints by type: FM (PPT/PT), Agent Bricks (KA/MAS/KIE/MS), AI Gateway, Classic ML
+- Extract Knowledge Assistants using the dedicated Knowledge Assistants API (`/api/2.1/knowledge-assistants`)
 - Enrich Agent Bricks with Tiles API metadata (name, description, instructions)
 - Export to JSON and Markdown reports
 
@@ -121,7 +122,9 @@ databricks-examples/
     ├── .env.template                          # Environment configuration template
     ├── 01_extract_ai_endpoints_detailed.py    # Detailed extraction with Tiles API
     ├── 02_generate_endpoint_analysis_report.py # Markdown reports by model_type
-    └── 03_extract_ai_endpoints_fast.py        # Fast single API call extraction
+    ├── 03_extract_ai_endpoints_fast.py        # Fast single API call extraction
+    ├── 04_extract_knowledge_assistants.py     # Detailed KA extraction (list + get)
+    └── 05_extract_knowledge_assistants_fast.py # Fast KA extraction (list only)
 ```
 
 ## 🎯 Use Cases

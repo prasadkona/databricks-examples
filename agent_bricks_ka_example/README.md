@@ -38,6 +38,7 @@ A **Knowledge Assistant** is an Agent Brick that enables document-based question
 | `src/03_test_ka_conversation.py` | Test KA with multi-turn conversation | Run locally |
 | `src/04_sync_ka_sources.py` | Force re-sync of KA knowledge sources | Run locally |
 | `src/05_add_ka_examples.py` | Add sample questions with guidelines | Run locally |
+| `src/06_extract_knowledge_assistants_fast.py` | Extract all KA metadata from workspace | Run locally |
 
 ## Prerequisites
 
@@ -251,13 +252,31 @@ python 03_test_ka_conversation.py SEC_Financial_Analyst  # By name
 - Compare the revenue growth of NVIDIA, Apple, and Samsung
 - What are the key risk factors mentioned in NVIDIA's annual report?
 
+### 06_extract_knowledge_assistants_fast.py
+
+**Purpose:** Extract metadata for all Knowledge Assistants in the workspace using a single API call.
+
+**Usage:**
+```bash
+cd src
+unset DATABRICKS_TOKEN DATABRICKS_CONFIG_PROFILE
+python 06_extract_knowledge_assistants_fast.py
+```
+
+**What it does:**
+1. Calls `GET /api/2.1/knowledge-assistants` to list all KAs
+2. Extracts metadata: id, name, description, instructions, endpoint, creator
+3. Saves to `_local/reports/knowledge_assistants_fast_latest.json`
+
+**API Reference:** [ListKnowledgeAssistants](https://docs.databricks.com/api/workspace/knowledgeassistants/listknowledgeassistants)
+
 ---
 
 ## REST API Reference
 
 | Operation | Endpoint | Method |
 |-----------|----------|--------|
-| List KAs | `/api/2.0/tiles?filter=tile_type=KA` | GET |
+| List KAs | `/api/2.1/knowledge-assistants` | GET |
 | Create KA | `/api/2.0/knowledge-assistants` | POST |
 | Get KA | `/api/2.0/knowledge-assistants/{tile_id}` | GET |
 | Update KA | `/api/2.0/knowledge-assistants/{tile_id}` | PATCH |
@@ -313,7 +332,8 @@ databricks-examples/
         ├── 02_ka_using_agent_bricks_manager.py  # Manager approach
         ├── 03_test_ka_conversation.py # Multi-turn conversation test
         ├── 04_sync_ka_sources.py      # Sync knowledge sources
-        └── 05_add_ka_examples.py      # Add sample questions
+        ├── 05_add_ka_examples.py      # Add sample questions
+        └── 06_extract_knowledge_assistants_fast.py  # Extract all KA metadata
 ```
 
 ---

@@ -4,11 +4,29 @@ Extract metadata about all deployed AI agents and serving endpoints in your Data
 
 ## Scripts
 
+### Serving Endpoints
+
 | Script | Description |
 |--------|-------------|
 | `01_extract_ai_endpoints_detailed.py` | Detailed extraction with per-endpoint API calls for full metadata including Tiles API enrichment |
 | `02_generate_endpoint_analysis_report.py` | Generates markdown reports and exports subsets by `model_type` |
 | `03_extract_ai_endpoints_fast.py` | Fast single API call extraction, classifies all endpoints by `model_type` |
+
+### Knowledge Assistants
+
+| Script | Description |
+|--------|-------------|
+| `04_extract_knowledge_assistants.py` | Detailed KA extraction using [Knowledge Assistants API](https://docs.databricks.com/api/workspace/knowledgeassistants) (list + get per KA) |
+| `05_extract_knowledge_assistants_fast.py` | Fast KA extraction using list API only |
+
+**Comparison:**
+
+| Aspect | 04 (Detailed) | 05 (Fast) |
+|--------|---------------|-----------|
+| API Calls | ListKnowledgeAssistants + GetKnowledgeAssistant per KA | ListKnowledgeAssistants only |
+| Speed | ~50 seconds (164 KAs) | ~3 seconds |
+| Fields | Full details (instructions, knowledge_bases, sample_questions) | Fields from list response |
+| Use Case | Full audit/analysis | Quick inventory |
 
 ## Configuration
 
@@ -53,7 +71,12 @@ ENV_NAME = "my-workspace"  # loads ../_local/my-workspace.env
 ```bash
 cd ai_agent_metadata_extract
 pip install databricks-sdk python-dotenv requests
+
+# Extract all serving endpoints (fast)
 python 03_extract_ai_endpoints_fast.py
+
+# Extract all Knowledge Assistants (fast)
+python 05_extract_knowledge_assistants_fast.py
 ```
 
 All output files are saved to `../_local/reports/`.
@@ -90,10 +113,23 @@ Endpoints are classified using the `model_type` field based on API response data
 
 ## API Notes
 
+### Serving Endpoints (01, 02, 03)
+
 - **Script 01**: Makes per-endpoint API calls and enriches Agent Bricks with Tiles API metadata (`tile_name`, `tile_description`, `tile_instructions`)
 - **Script 03**: Single list API call for speed; returns basic `tile_metadata` fields only
 - Both use `tile_endpoint_metadata.problem_type` for Agent Bricks classification
 - Unclassified endpoints are marked as `UNCLASSIFIED`
+
+### Knowledge Assistants (04, 05)
+
+| Script | APIs Used |
+|--------|-----------|
+| **04** | `GET /api/2.1/knowledge-assistants` (list) + `GET /api/2.1/knowledge-assistants/{id}` (details) |
+| **05** | `GET /api/2.1/knowledge-assistants` (list only) |
+
+Output files:
+- `knowledge_assistants_latest.json` - from script 04
+- `knowledge_assistants_fast_latest.json` - from script 05
 
 ---
 
