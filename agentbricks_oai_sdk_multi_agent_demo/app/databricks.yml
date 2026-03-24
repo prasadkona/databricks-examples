@@ -1,0 +1,56 @@
+bundle:
+  name: sec_financial_analyst_agent
+
+resources:
+  apps:
+    sec_financial_analyst_agent:
+      name: "agent-sec-financial-analyst-v3"
+      description: "SEC Financial Analyst Multi-Agent Orchestrator - queries KA, Genie Space, and UC Functions"
+      source_code_path: ./
+      config:
+        command: ["uv", "run", "start-server"]
+        env:
+          - name: MLFLOW_TRACKING_URI
+            value: "databricks"
+          - name: MLFLOW_REGISTRY_URI
+            value: "databricks-uc"
+          - name: MLFLOW_EXPERIMENT_ID
+            value: ""   # Leave empty to auto-create; or set to your experiment ID
+          - name: UC_CATALOG
+            value: "your_catalog"
+          - name: UC_SCHEMA
+            value: "your_schema"
+          - name: TABLE_PREFIX
+            value: "sec_fin_"
+          - name: SQL_WAREHOUSE_ID
+            value: "your-warehouse-id"
+          - name: GENIE_SPACE_ID
+            value: ""
+          - name: KA_ENDPOINT
+            value: ""
+
+      resources:
+        - name: 'knowledge_assistant'
+          serving_endpoint:
+            name: ''
+            permission: 'CAN_QUERY'
+        - name: 'sql_warehouse'
+          sql_warehouse:
+            id: 'your-warehouse-id'
+            permission: 'CAN_USE'
+
+targets:
+  dev:
+    mode: development
+    default: true
+    workspace:
+      host: https://your-workspace.cloud.databricks.com
+
+  prod:
+    mode: production
+    workspace:
+      host: https://your-workspace.cloud.databricks.com
+    resources:
+      apps:
+        sec_financial_analyst_agent:
+          name: agent-sec-financial-analyst

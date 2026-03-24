@@ -1,0 +1,39 @@
+# Databricks bundle state (contains workspace/token paths)
+.databricks/
+
+# Local config and secrets — NEVER commit this folder
+_local/
+
+# Python virtualenv
+.venv/
+venv/
+env/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*.pyo
+.pytest_cache/
+
+# Lock file (regenerate locally with uv sync)
+uv.lock
+
+# Environment files — only .env.example is safe to commit
+.env
+*.env
+!.env.example
+
+# macOS
+.DS_Store
+
+# IDE
+.idea/
+.vscode/
+*.swp
+
+# Jupyter checkpoints
+.ipynb_checkpoints/
+
+# Build artifacts
+dist/
+*.egg-info/

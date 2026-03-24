@@ -1,0 +1,77 @@
+# SDP pipeline DAB - single source of truth: SQL files in this folder, bundle config here.
+# Pipeline name: sec_financial_analyst_pipeline (production mode suppresses the [dev user] prefix).
+# Deploy: from project root run  uv run deploy-sdp-pipeline
+# Or:     cd notebooks/sdp_pipeline_src && databricks bundle validate -t dev && databricks bundle deploy -t dev --auto-approve
+bundle:
+  name: sec_financial_analyst_pipeline
+
+variables:
+  catalog:
+    description: Unity Catalog catalog for pipeline tables
+    default: your_catalog
+  schema:
+    description: Unity Catalog schema for pipeline tables
+    default: your_schema
+  volume:
+    description: UC Volume name containing the PDF documents
+    default: ka_demo
+  docs_subfolder:
+    description: "Subfolder within the volume containing PDFs (matches SEC_DOCS_SUBFOLDER env var)"
+    default: sec_2024
+
+resources:
+  pipelines:
+    sec_financial_analyst_pipeline:
+      name: sec_financial_analyst_pipeline
+      catalog: ${var.catalog}
+      target: ${var.schema}
+      serverless: true
+      continuous: false
+      development: false
+      channel: CURRENT
+      # Install yfinance for stock data fetching in 00_bronze_stock_initial.py
+      environment:
+        dependencies:
+          - yfinance
+      libraries:
+        # Python DLT files — order matters for DAG resolution:
+        #   00_company_registry.py depends on silver (02)
+        #   00_bronze_stock_initial.py depends on company_tickers_registry (00_company_registry.py)
+        - file:
+            path: 00_company_registry.py
+        - file:
+            path: 00_bronze_stock_initial.py
+        - file:
+            path: 01_bronze_parsed_documents.sql
+        - file:
+            path: 02_silver_financial_metrics.sql
+        - file:
+            path: 03_gold_company_financials.sql
+        - file:
+            path: 04_gold_revenue_segments.sql
+        - file:
+            path: 05_gold_revenue_geography.sql
+        - file:
+            path: 06_silver_stock_daily.sql
+        - file:
+            path: 07_gold_stock_summary.sql
+      configuration:
+        pipelines.enableTrackHistory: "true"
+        # Make variables available to SQL files for table/path references
+        catalog: ${var.catalog}
+        schema: ${var.schema}
+        volume: ${var.volume}
+        docs_subfolder: ${var.docs_subfolder}
+
+targets:
+  dev:
+    # Production mode so pipeline name is exactly sec_financial_analyst_pipeline (no [dev user] prefix)
+    mode: production
+    default: true
+    workspace:
+      host: https://your-workspace.cloud.databricks.com
+
+  prod:
+    mode: production
+    workspace:
+      host: https://your-workspace.cloud.databricks.com

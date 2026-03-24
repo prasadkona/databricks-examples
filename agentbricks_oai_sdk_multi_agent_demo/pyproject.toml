@@ -1,0 +1,58 @@
+[project]
+name = "sec-financial-analyst-agent"
+version = "0.1.0"
+description = "SEC Financial Analyst Multi-Agent Orchestrator - queries KA, Genie Space, and UC Functions"
+readme = "README.md"
+authors = [
+    { name = "Prasad Kona", email = "prasad.kona@gmail.com" }
+]
+requires-python = ">=3.11"
+dependencies = [
+    "fastapi>=0.129.0",
+    "uvicorn>=0.41.0",
+    "databricks-openai>=0.11.0",
+    "databricks-agents>=1.9.3",
+    "databricks-sdk>=0.40.0",
+    "mlflow>=3.10.0",
+    "openai-agents>=0.4.1",
+    "python-dotenv>=1.2.1",
+    "yfinance>=0.2.0",
+    "requests>=2.32.0",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["notebooks"]
+
+[dependency-groups]
+dev = [
+    "hatchling>=1.28.0",
+    "pytest>=9.0.2",
+]
+
+[project.scripts]
+# KA lifecycle
+create-ka = "notebooks.agentbricks_ka_src.step01_create_ka:main"
+sync-ka = "notebooks.agentbricks_ka_src.step02_sync_ka_sources:main"
+test-ka = "notebooks.agentbricks_ka_src.step03_test_ka:main"
+run-ka-sequence = "notebooks.agentbricks_ka_src.run_ka_sequence:main"
+# Cleanup
+demo-cleanup = "notebooks.demo_cleanup_src.cleanup_all:main"
+cleanup-tables = "notebooks.demo_cleanup_src.cleanup_all:main_tables_compat"
+# Data engineering - transform
+deploy-sdp-pipeline = "notebooks.data_engg_src.transform.deploy_sdp_pipeline:main"
+# Data engineering - incremental stock refresh
+refresh-stocks = "notebooks.data_engg_src.ingest.refresh_stock_prices:main"
+# Agent lifecycle
+test-agent = "notebooks.agent_src.test_agent:main"
+deploy-agent-app = "notebooks.agent_src.deploy_agent_app:main"
+test-agent-app = "notebooks.agent_src.test_deployed_agent_app:main"
+test-services = "notebooks.agent_src.test_services:main"
+validate-traces = "notebooks.agent_src.trace_validator:main"
+# Orchestration
+run-sequence = "notebooks.run_sequence:main"
+run-workspace-notebooks = "notebooks.run_workspace_notebooks:main"
+sync-workspace = "notebooks.sync_workspace:main"

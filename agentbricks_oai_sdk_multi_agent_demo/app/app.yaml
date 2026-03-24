@@ -1,0 +1,4 @@
+command:
+  - uv
+  - run
+  - start-server
