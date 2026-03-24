@@ -1,7 +1,7 @@
 # Databricks Examples
 
 **Author**: Prasad Kona  
-**Last Updated**: March 3, 2026
+**Last Updated**: March 19, 2026
 
 A collection of practical, production-ready examples demonstrating how to build AI agents, deploy ML models, and create intelligent applications on the Databricks platform. Each project includes complete code, detailed documentation, and best practices for enterprise deployment.
 
@@ -75,6 +75,47 @@ Extract and classify metadata about all deployed AI agents, serving endpoints, a
 
 ---
 
+### 5. [SEC Financial Analyst — Multi-Agent AI System](./agentbricks_oai_sdk_multi_agent_demo)
+
+An end-to-end, production-quality AI agent system that analyzes SEC 10-K filings and financial data. Drop any company's annual reports into a Unity Catalog volume — the pipeline automatically discovers companies using Databricks AI functions, extracts structured financial metrics, loads stock history, and exposes the data to a multi-agent orchestrator that intelligently routes questions across three specialized tools.
+
+**The Use Case:**  
+Investment analysts spend hours manually cross-referencing financial filings, market data, and analytical models. This demo automates that workflow with a conversational AI agent:
+
+- *"What are the key risk factors from the 10-K?"* → Knowledge Assistant searches SEC filing PDFs
+- *"What is the company's revenue trend over 3 years?"* → Genie Space queries structured financial tables
+- *"Should I invest in this company?"* → Supervisor agent orchestrates across all three sources: valuation score (UC function), revenue data (Genie), risk factors (KA)
+
+**Highlights:**
+
+**Agent Bricks — Knowledge Assistant (KA)**
+- Programmatically create and manage a KA over SEC PDF filings in Unity Catalog Volumes
+- Automatic RAG indexing with citation-backed answers to qualitative questions
+
+**Agent Bricks — Genie Space**
+- Natural language SQL interface over gold-layer financial and stock tables
+- Agent queries Genie via MCP for quantitative analysis (revenue, EPS, stock performance)
+
+**Supervisor / Multi-Agent Orchestration**
+- OpenAI Agents SDK supervisor routes requests to KA, Genie, and UC Functions as tools
+- UC Functions handle complex analytical computations (valuation scoring, peer comparison)
+- Full MLflow tracing across every agent turn for observability and debugging
+
+**AI-Driven Data Pipeline (Spark Declarative Pipelines)**
+- `ai_parse_document` → `ai_classify` → `ai_extract` chain in DLT for fully automatic company discovery from PDFs — no hardcoded tickers or mappings
+- `mapInPandas` + `yfinance` in DLT for dynamic stock history loading
+- Bronze → Silver → Gold medallion architecture in Unity Catalog
+
+**Deployed as a Databricks App**
+- FastAPI server packaged as a Databricks App with OAuth and chat proxy enabled
+- `uv run run-sequence --all` drives the complete lifecycle: KA setup → data pipeline → agent deployment
+
+**Tech Stack:** OpenAI Agents SDK, Databricks Agent Bricks (KA + Genie), Spark Declarative Pipelines, AI Functions, Unity Catalog, Databricks Apps, MLflow, FastAPI
+
+👉 [View detailed documentation](./agentbricks_oai_sdk_multi_agent_demo/README.md)
+
+---
+
 ## 🚀 Getting Started
 
 Each project is self-contained with its own documentation and dependencies:
@@ -97,35 +138,16 @@ Additional requirements vary by project - see individual project READMEs for det
 
 ```
 databricks-examples/
-├── README.md                                  # This file
-├── _local/                                    # Gitignored credentials & local data
+├── README.md                                      # This file
 │
-├── python_udfs_custom_dependencies/           # Python UDFs with custom dependencies
-│   ├── README.md                              # Full project documentation
-│   ├── requirements.txt                       # Python dependencies
-│   └── notebooks/                             # 4 notebooks (training, UDFs, SQL examples)
-│
-├── databricks_claude_agent_sdk_example/       # Claude Agent SDK demos
-│   ├── README.md                              # Full project documentation
-│   ├── SETUP.md                               # Setup instructions
-│   ├── requirements.txt                       # Python dependencies
-│   └── notebooks/                             # 6 progressive examples
-│
-├── agent_bricks_ka_example/                   # Agent Bricks Knowledge Assistant
-│   ├── README.md                              # Full project documentation
-│   ├── .env.template                          # Environment configuration template
-│   ├── requirements.txt                       # Python dependencies
-│   └── src/                                   # 6 scripts (setup, create, test, sync)
-│
-└── ai_agent_metadata_extract/                 # AI endpoint metadata extraction
-    ├── README.md                              # Full project documentation
-    ├── .env.template                          # Environment configuration template
-    ├── 01_extract_ai_endpoints_detailed.py    # Detailed extraction with Tiles API
-    ├── 02_generate_endpoint_analysis_report.py # Markdown reports by model_type
-    ├── 03_extract_ai_endpoints_fast.py        # Fast single API call extraction
-    ├── 04_extract_knowledge_assistants.py     # Detailed KA extraction (list + get)
-    └── 05_extract_knowledge_assistants_fast.py # Fast KA extraction (list only)
+├── python_udfs_custom_dependencies/               # ML models as Unity Catalog UDFs
+├── databricks_claude_agent_sdk_example/           # Claude Agent SDK progressive examples
+├── agent_bricks_ka_example/                       # Agent Bricks Knowledge Assistant
+├── ai_agent_metadata_extract/                     # AI endpoint metadata & reporting
+└── agentbricks_oai_sdk_multi_agent_demo/          # SEC Financial Analyst Multi-Agent
 ```
+
+Each project is self-contained with its own `README.md`, `.env.example`/`.env.template`, and dependencies.
 
 ## 🎯 Use Cases
 
@@ -140,6 +162,11 @@ databricks-examples/
 ### Agent Bricks & RAG
 - Create Knowledge Assistants for document Q&A with automatic RAG indexing
 - Build production-ready document assistants with citation-backed responses
+
+### Multi-Agent Orchestration & Databricks Apps
+- Supervisor agent pattern: route user questions across KA, Genie Space, and UC Functions
+- Deploy multi-agent systems as full Databricks Apps with OAuth, chat proxy, and MLflow tracing
+- End-to-end financial analyst use case: SEC filings + structured data + custom computations
 
 ### Governance & Observability
 - Extract and classify all AI endpoints across your workspace
@@ -173,4 +200,4 @@ This is open-source software - feel free to reuse, adapt, and build upon these e
 **Repository**: https://github.com/prasadkona/databricks-examples  
 **Author**: Prasad Kona  
 **Contact**: prasad.kona@gmail.com  
-**Last Updated**: March 3, 2026
+**Last Updated**: March 19, 2026
