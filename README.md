@@ -1,7 +1,7 @@
 # Databricks Examples
 
 **Author**: Prasad Kona  
-**Last Updated**: March 19, 2026
+**Last Updated**: September 24, 2026
 
 A collection of practical, production-ready examples demonstrating how to build AI agents, deploy ML models, and create intelligent applications on the Databricks platform. Each project includes complete code, detailed documentation, and best practices for enterprise deployment.
 
@@ -116,6 +116,38 @@ Investment analysts spend hours manually cross-referencing financial filings, ma
 
 ---
 
+### 6. [Integrating with Genie One](./genie_one_example)
+
+Call Databricks **Genie One** — the workspace-wide, ontology-grounded analytics coworker — from your own client. A client sends a natural-language question; Genie One searches governed data, writes SQL, and returns an answer with citations. Unity Catalog permissions apply on every call through OAuth U2M.
+
+**Highlights:**
+- Headless MCP over REST JSON-RPC (`genie_ask` / `genie_poll_response`) for agents, services, and CLIs
+- MCP Apps host that advertises UI support and renders **Genie One’s Interactive View** in an iframe
+- Connection-screen UI so users enter workspace host and OAuth app values instead of a pre-loaded `.env`
+- Source attribution URLs and request traces (tokens never printed)
+
+**Tech Stack:** Python, Unity Gateway MCP (`ai-gateway`), MCP Apps, OAuth U2M, FastAPI, React
+
+👉 [View detailed documentation](./genie_one_example/README.md)
+
+---
+
+### 7. [Integrating with Genie Agents](./genie_agents_example)
+
+Call one curated Databricks **Genie Agent** (formerly a Genie Space) through its public REST APIs as the signed-in user. Use this when you need a single domain-scoped agent instead of workspace-wide Genie One. The same agent identifier is used for both `/spaces/{id}` and `/agents/{id}` paths.
+
+**Highlights:**
+- Agent Mode SSE CLI with visualization disabled — inspect research, SQL, tables, reports, and citations
+- Agent Mode visualization UI (`enable_viz=true`) with a local connection screen and generated charts
+- Conversation API CLI — start a conversation and poll until the answer is complete
+- OAuth U2M with granular `genie` scope; tokens stay in process memory
+
+**Tech Stack:** Python, Genie Agent Mode API, Genie Conversation API, OAuth U2M, Server-Sent Events, FastAPI, React
+
+👉 [View detailed documentation](./genie_agents_example/README.md)
+
+---
+
 ## 🚀 Getting Started
 
 Each project is self-contained with its own documentation and dependencies:
@@ -144,7 +176,9 @@ databricks-examples/
 ├── databricks_claude_agent_sdk_example/           # Claude Agent SDK progressive examples
 ├── agent_bricks_ka_example/                       # Agent Bricks Knowledge Assistant
 ├── ai_agent_metadata_extract/                     # AI endpoint metadata & reporting
-└── agentbricks_oai_sdk_multi_agent_demo/          # SEC Financial Analyst Multi-Agent
+├── agentbricks_oai_sdk_multi_agent_demo/          # SEC Financial Analyst Multi-Agent
+├── genie_one_example/                             # Genie One MCP + MCP Apps
+└── genie_agents_example/                          # Genie Agent Mode + Conversation APIs
 ```
 
 Each project is self-contained with its own `README.md`, `.env.example`/`.env.template`, and dependencies.
@@ -158,6 +192,10 @@ Each project is self-contained with its own `README.md`, `.env.example`/`.env.te
 ### AI Agents & GenAI
 - Build autonomous agents with Claude models and enterprise data access
 - Integrate AI agents with Unity Catalog, DBSQL, and Genie for data-driven applications
+
+### Genie One & Genie Agents
+- Embed workspace-wide Genie One via Unity Gateway MCP (text tools or MCP Apps Interactive View)
+- Call a single curated Genie Agent with Agent Mode SSE or the Conversation REST API
 
 ### Agent Bricks & RAG
 - Create Knowledge Assistants for document Q&A with automatic RAG indexing

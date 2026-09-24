@@ -77,3 +77,6 @@ tmp/
 .pytest_cache/
 .coverage
 htmlcov/
+
+# Node (Genie MCP Apps / visualization UIs)
+node_modules/

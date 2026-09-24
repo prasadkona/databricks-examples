@@ -1,0 +1,25 @@
+{
+  "name": "genie-agents-agent-mode-visualization-ui",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "tsc --noEmit && vite build",
+    "serve": "node --import tsx serve.ts",
+    "start": "npm run build && npm run serve"
+  },
+  "dependencies": {
+    "express": "^5.1.0",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.10.0",
+    "@types/react": "^19.2.2",
+    "@types/react-dom": "^19.2.2",
+    "tsx": "^4.20.0",
+    "typescript": "^7.0.2",
+    "vite": "^6.0.0"
+  }
+}

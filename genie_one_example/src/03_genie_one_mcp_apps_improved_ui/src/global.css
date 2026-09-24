@@ -1,0 +1,108 @@
+:root {
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, sans-serif;
+  color: #172033;
+  background: #f4f6f8;
+  font-synthesis: none;
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; }
+button, input, textarea { font: inherit; }
+
+main { max-width: 1400px; margin: 0 auto; padding: 32px; }
+header { display: flex; justify-content: space-between; gap: 24px; align-items: flex-start; margin-bottom: 24px; }
+h1 { margin: 2px 0 6px; font-size: 32px; letter-spacing: -0.03em; }
+h2 { margin: 0 0 14px; font-size: 17px; }
+h3 { font-size: 14px; margin-top: 20px; }
+.eyebrow { margin: 0; color: #e34a38; font-size: 12px; font-weight: 800; letter-spacing: .12em; }
+.subtitle, .muted { color: #667085; }
+.subtitle { margin: 0; }
+.status { padding: 8px 12px; border-radius: 999px; background: #e9f8ef; color: #16794a; font-size: 13px; font-weight: 700; white-space: nowrap; }
+.statusNeutral { background: #eef1f4; color: #475467; }
+
+section, .error { background: white; border: 1px solid #dfe3e8; border-radius: 12px; padding: 20px; box-shadow: 0 1px 2px rgba(16,24,40,.04); }
+.tabs { display: flex; gap: 8px; margin-bottom: 18px; border-bottom: 1px solid #dfe3e8; }
+.tabs button { margin-bottom: -1px; border-radius: 8px 8px 0 0; background: transparent; color: #667085; border-bottom: 3px solid transparent; padding: 12px 18px; }
+.tabs button.active { color: #172033; border-bottom-color: #e34a38; }
+.tabs button span { display: inline-grid; place-items: center; width: 22px; height: 22px; margin-right: 7px; border-radius: 50%; background: #e7eaee; font-size: 12px; }
+.tabs button.active span { background: #fee7e3; color: #b93829; }
+.connectionPanel { margin-bottom: 18px; }
+.panelHeading, .sectionTitlePlain { display: flex; align-items: flex-start; justify-content: space-between; gap: 20px; }
+.panelHeading h2, .sectionTitlePlain h2 { margin-bottom: 5px; }
+.panelHeading p, .sectionTitlePlain p { margin: 0; }
+.connectedBadge { border-radius: 999px; padding: 7px 11px; color: #16794a; background: #e9f8ef; font-size: 12px; font-weight: 750; white-space: nowrap; }
+.redirectValue { display: inline-block; margin-top: 9px; padding: 8px 10px; border-radius: 6px; color: #344054; background: #f4f6f8; font-size: 13px; user-select: all; }
+.instruction { margin: 18px 0; padding: 13px 15px; border-left: 4px solid #f3b33d; background: #fff9ec; color: #594312; font-size: 14px; line-height: 1.5; }
+.formGrid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.formGrid label, .ask > label { display: grid; gap: 7px; color: #344054; font-size: 13px; font-weight: 700; }
+.formGrid input, textarea { width: 100%; border: 1px solid #cbd2da; border-radius: 8px; padding: 11px 13px; color: #172033; background: white; }
+.formGrid input:focus, textarea:focus { outline: 3px solid rgba(23, 92, 211, .14); border-color: #175cd3; }
+.formGrid input:disabled { color: #667085; background: #f4f6f8; }
+.securityNote { margin: 14px 0; color: #667085; font-size: 12px; }
+.formActions, .queryActions { display: flex; justify-content: flex-end; gap: 10px; }
+.secondary { color: #344054; background: white; border: 1px solid #cbd2da; }
+.textButton { padding: 4px; color: #175cd3; background: transparent; font-size: 13px; }
+.overview {
+  margin-bottom: 18px;
+  background: white;
+  border: 1px solid #dfe3e8;
+  border-radius: 12px;
+  padding: 14px 20px;
+  box-shadow: 0 1px 2px rgba(16,24,40,.04);
+}
+.overview > summary {
+  cursor: pointer;
+  font-weight: 750;
+  font-size: 14px;
+  list-style: none;
+}
+.overview > summary::-webkit-details-marker { display: none; }
+.overview > summary::after {
+  content: "▸";
+  float: right;
+  color: #667085;
+}
+.overview[open] > summary::after { content: "▾"; }
+.overviewBody { margin-top: 12px; padding-top: 12px; border-top: 1px solid #e7eaee; color: #344054; font-size: 14px; line-height: 1.55; }
+.overviewBody p { margin: 0 0 10px; }
+.overviewBody ol { margin: 0 0 10px; padding-left: 20px; }
+.overviewBody li { margin-bottom: 8px; }
+.overviewBody code { font-size: 12px; background: #f4f6f8; padding: 1px 5px; border-radius: 4px; }
+.overviewLinks { margin-bottom: 0 !important; font-size: 13px; }
+
+.ask { margin-bottom: 18px; }
+.ask label { display: block; font-size: 13px; font-weight: 700; margin-bottom: 8px; }
+.askRow { display: flex; gap: 10px; }
+input { flex: 1; min-width: 0; border: 1px solid #cbd2da; border-radius: 8px; padding: 11px 13px; }
+textarea { min-height: 86px; resize: vertical; margin-bottom: 12px; }
+button { border: 0; border-radius: 8px; padding: 11px 20px; background: #1b3139; color: white; font-weight: 750; cursor: pointer; }
+button:disabled { opacity: .45; cursor: not-allowed; }
+.error { margin-bottom: 18px; color: #a12424; border-color: #f3b8b8; background: #fff6f6; }
+
+.view { margin-bottom: 18px; padding: 0; overflow: hidden; }
+.sectionTitle { display: flex; justify-content: space-between; align-items: center; padding: 16px 20px; border-bottom: 1px solid #e7eaee; }
+.sectionTitle h2 { margin: 0; }
+.sectionTitle span { color: #667085; font: 12px ui-monospace, monospace; }
+.view iframe { display: block; width: 100%; height: 680px; border: 0; }
+.placeholder { height: 240px; display: grid; place-items: center; color: #667085; }
+
+.details { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.trace { display: flex; justify-content: space-between; gap: 16px; padding: 9px 0; border-bottom: 1px solid #edf0f2; font-size: 13px; }
+.trace span { color: #667085; white-space: nowrap; }
+.traceList { max-height: 260px; overflow: auto; }
+details { margin-top: 12px; border: 1px solid #e1e5e9; border-radius: 8px; padding: 10px; }
+summary { cursor: pointer; font-weight: 700; font-size: 13px; }
+pre { max-height: 280px; overflow: auto; white-space: pre-wrap; word-break: break-word; font-size: 11px; color: #344054; }
+ul { padding-left: 18px; }
+a { color: #175cd3; word-break: break-all; }
+
+@media (max-width: 800px) {
+  main { padding: 18px; }
+  header { flex-direction: column; }
+  .details { grid-template-columns: 1fr; }
+  .askRow { flex-direction: column; }
+  .tabs { overflow-x: auto; }
+  .tabs button { white-space: nowrap; }
+  .formGrid { grid-template-columns: 1fr; }
+  .panelHeading, .sectionTitlePlain { flex-direction: column; }
+}
