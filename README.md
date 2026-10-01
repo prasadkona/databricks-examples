@@ -1,7 +1,7 @@
 # Databricks Examples
 
 **Author**: Prasad Kona  
-**Last Updated**: September 24, 2026
+**Last Updated**: September 30, 2026
 
 A collection of practical, production-ready examples demonstrating how to build AI agents, deploy ML models, and create intelligent applications on the Databricks platform. Each project includes complete code, detailed documentation, and best practices for enterprise deployment.
 
@@ -148,6 +148,22 @@ Call one curated Databricks **Genie Agent** (formerly a Genie Space) through its
 
 ---
 
+### 8. [Unity Gateway Metadata Extract](./unity_gateway_metadata_extract)
+
+Discover and invoke models through Databricks **AI Gateway**: built-in `system.ai` foundation models, Unity Catalog **model provider services** (external providers), and AgentBricks inventory (Databricks Apps with tracing experiments, UC **agent services**). Includes Responses and OpenAI-compatible chat completions against `/ai-gateway/mlflow/v1/...`.
+
+**Highlights:**
+- List foundation models from serving endpoints (`FOUNDATION_MODEL_API`) with no extra setup
+- Paginate UC model provider services and UC agent services
+- Fetch per-endpoint metadata and invoke with `system.ai.<model>` or `catalog.schema.service` in the request body
+- Workspace notebook auth via `dbutils` (session token)
+
+**Tech Stack:** Python, Databricks REST, Unity Catalog, AI Gateway
+
+👉 [View detailed documentation](./unity_gateway_metadata_extract/README.md)
+
+---
+
 ## 🚀 Getting Started
 
 Each project is self-contained with its own documentation and dependencies:
@@ -178,7 +194,8 @@ databricks-examples/
 ├── ai_agent_metadata_extract/                     # AI endpoint metadata & reporting
 ├── agentbricks_oai_sdk_multi_agent_demo/          # SEC Financial Analyst Multi-Agent
 ├── genie_one_example/                             # Genie One MCP + MCP Apps
-└── genie_agents_example/                          # Genie Agent Mode + Conversation APIs
+├── genie_agents_example/                          # Genie Agent Mode + Conversation APIs
+└── unity_gateway_metadata_extract/                # AI Gateway: system.ai, model & agent services
 ```
 
 Each project is self-contained with its own `README.md`, `.env.example`/`.env.template`, and dependencies.
@@ -209,6 +226,7 @@ Each project is self-contained with its own `README.md`, `.env.example`/`.env.te
 ### Governance & Observability
 - Extract and classify all AI endpoints across your workspace
 - Generate reports on Foundation Models, Agent Bricks, and AI Gateway usage
+- Discover `system.ai` models, UC model provider services, and UC agent services, then invoke through AI Gateway
 
 ## 🔐 Security
 
@@ -238,4 +256,4 @@ This is open-source software - feel free to reuse, adapt, and build upon these e
 **Repository**: https://github.com/prasadkona/databricks-examples  
 **Author**: Prasad Kona  
 **Contact**: prasad.kona@gmail.com  
-**Last Updated**: March 19, 2026
+**Last Updated**: September 30, 2026
